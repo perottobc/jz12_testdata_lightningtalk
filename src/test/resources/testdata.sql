@@ -1,0 +1,5 @@
+insert into Customer (id,nick,updated) values (1,'Dokie','0001-01-01 01:01:01')
+insert into ShoppingList (cid,id,updated) values (1,1,'0001-01-01 01:01:01')         
+insert into Item (sid,id,name,updated) values (1,1,'bread', '0001-01-01 01:01:01')
+insert into Item (sid,id,name,updated) values (1,2,'butter','0001-01-01 01:01:01')
+insert into Item (sid,id,name,updated) values (1,3,'milk',  '0001-01-01 01:01:01')
