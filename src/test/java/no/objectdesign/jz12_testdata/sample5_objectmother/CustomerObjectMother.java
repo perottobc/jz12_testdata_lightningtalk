@@ -6,7 +6,8 @@ public class CustomerObjectMother {
 
 	Customer customer = new Customer();
 
-	public void addShoppingLists(String[][] shoppingListList) {
+	public void addShoppingLists(String[][] shoppingListList) 
+	{
 		for (String[] shoppingList : shoppingListList) {
 			customer.newShoppingList().addByName(shoppingList);
 		}
