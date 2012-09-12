@@ -6,11 +6,13 @@ public class CustomerObjectMother {
 
 	Customer customer = new Customer();
 
-	public void addShoppingLists(String[][] shoppingListList) 
+	public CustomerObjectMother addShoppingLists(
+		String[][] shoppingListList) 
 	{
 		for (String[] shoppingList : shoppingListList) {
 			customer.newShoppingList().addByName(shoppingList);
 		}
+		return this;
 	}
 
 	public Customer getCustomer() {

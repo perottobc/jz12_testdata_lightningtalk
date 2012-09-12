@@ -26,28 +26,26 @@ import org.springframework.transaction.annotation.Transactional;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
-	"classpath:test_infra.hsqldb.xml",
-	"classpath:main_module.xml" })
+	"classpath:test_infra.hsqldb.xml","classpath:main_module.xml" })
 @TransactionConfiguration
 @Transactional
 public class CustomerTest {
-	
-	CustomerObjectMother objMother = new CustomerObjectMother();
 
-	@Before
-	public void createTestdata() {		
-		objMother.addShoppingLists( new String[][] {
-			{ "bread","butter","milk"  },
-			{ "egg"  ,"bacon" ,"juice" },
-			{ "egg"  ,"bacon" ,"juice" },
-			{ "egg"  ,"bacon"          }, 
-			{ "egg"                    } } );		
-	}
+	private Integer custId;
 
 	@Test
 	public void toppTipsIsBasedOnItemCountInShoppingHistory() {
-		Customer customer = objMother.getCustomer();
 		
+		CustomerObjectMother objMother = new CustomerObjectMother()
+		.addShoppingLists(new String[][] {
+			{ "bread","butter","milk" }, 
+			{ "egg","bacon","juice" },
+			{ "egg","bacon","juice" }, 
+			{ "egg","bacon" }, 
+			{ "egg" } });
+		
+		Customer customer = objMother.getCustomer();
+
 		List<String> tips = customer.shoppingTips();
 
 		assertThat(tips).startsWith("egg", "bacon", "juice");

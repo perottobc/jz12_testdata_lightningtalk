@@ -25,25 +25,24 @@ import org.springframework.transaction.annotation.Transactional;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
-	"classpath:test_infra.hsqldb.xml",
-	"classpath:main_module.xml" })
+	"classpath:test_infra.hsqldb.xml","classpath:main_module.xml" })
 @TransactionConfiguration
 @Transactional
 public class CustomerTest {
-	
+
 	private Integer custId;
 
 	@Before
 	public void insertTestdata() {
-		CustomerObjectMother objMother = new CustomerObjectMother();
-		objMother.addShoppingLists( new String[][] {
-			{ "bread","butter","milk"  },
-			{ "egg"  ,"bacon" ,"juice" },
-			{ "egg"  ,"bacon" ,"juice" },
-			{ "egg"  ,"bacon"          }, 
-			{ "egg"                    } } );
-		
-		custId = customerRepository.save( objMother.getCustomer() );
+		CustomerObjectMother objMother = new CustomerObjectMother()
+			.addShoppingLists(new String[][] {
+				{ "bread","butter","milk" }, 
+				{ "egg","bacon","juice" },
+				{ "egg","bacon","juice" }, 
+				{ "egg","bacon" }, 
+				{ "egg" } });
+
+		custId = customerRepository.save(objMother.getCustomer());
 	}
 
 	@Test
