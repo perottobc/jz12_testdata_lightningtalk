@@ -45,36 +45,4 @@ public class CustomerTest {
 
 		assertThat(tips).startsWith("egg", "bacon", "juice");
 	}
-
-	@Autowired
-	JdbcTemplate jdbcTemplate;
-
-	@Autowired
-	private CustomerRepository customerRepository;
-
-	@Autowired
-	DataSource dataSource;
-
-	// updated gir presedens ved tips
-	// alt fungerer, inntil lastUpdated blir endret til å følge updateDato
-	void sql(File sql) {
-		List<String> sqlInserts = null;
-		try {
-			sqlInserts = FileUtils.readLines(sql);
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
-
-		for (String insert : sqlInserts) {
-			if (!insert.trim().isEmpty()) {
-				try {
-					jdbcTemplate.execute(insert);
-				} catch (SQLGrammarException e) {
-					throw new RuntimeException(
-						"Feil på linje: " + insert, e);
-				}
-			}
-		}
-	}
-
 }
